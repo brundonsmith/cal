@@ -1,0 +1,22 @@
+{
+  "name": "cal-server",
+  "version": "0.1.0",
+  "description": "Homegrown calendar-as-a-service that can be used with major calendar clients.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": ". ./vars.sh ; nodemon index.js"
+  },
+  "keywords": [
+    "calendar",
+    "service"
+  ],
+  "author": "Brandon Smith",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.1",
+    "promise": "^7.1.1"
+  }
+}
