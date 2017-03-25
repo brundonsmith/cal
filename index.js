@@ -64,13 +64,13 @@ app.post('/calendar', function (req, res) {
 app.delete('/calendar/:id', function (req, res) {
   var id = req.params.id;
 
-  calendar.deleteOne({ _id: id })
+  models.Calendar.deleteOne({ _id: id })
     .catch(function(err) {
       console.error(err);
       res.sendStatus(404);
     })
-    .then(function(calendar) {
-      res.json(calendar);
+    .then(function(result) {
+      res.json(result);
     });
 });
 
