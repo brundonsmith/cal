@@ -3,11 +3,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 const User = mongoose.model('User', new Schema({
-  name: String,
-  calendars: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Calendar',
-  }],
+  _id: String,
+  firstName: String,
+  lastName: String,
+  // password hash
 }));
 
 module.exports = User;
