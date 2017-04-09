@@ -1,5 +1,6 @@
 
 var mongoose = require('mongoose');
+var passport = require('passport');
 
 const Calendar = mongoose.model('Calendar');
 
@@ -30,7 +31,7 @@ module.exports = function(app) {
       });
   });
 
-  app.post('/calendar', function (req, res) {
+  app.post('/calendar', passport.authenticate("jwt", { session: false }), function (req, res) {
     var newCalendar = new Calendar(req.body);
 
     newCalendar.save()

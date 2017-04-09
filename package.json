@@ -16,7 +16,10 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "jwt-simple": "^0.5.1",
     "mongoose": "^4.9.1",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
     "promise": "^7.1.1"
   }
 }

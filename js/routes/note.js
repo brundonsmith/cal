@@ -1,6 +1,8 @@
 
 var mongoose = require('mongoose');
 
+const Note = mongoose.model('Note');
+
 module.exports = function(app) {
 
     app.get('/note/all', function (req, res) {
@@ -8,7 +10,7 @@ module.exports = function(app) {
       var pageNumber = req.query.pageNumber;
       // TODO: Implement paging
 
-      mongoose.model('Note').find()
+      Note.find()
         .catch(function(err) {
           console.error(err);
           res.sendStatus(500);
@@ -21,7 +23,7 @@ module.exports = function(app) {
     app.get('/note/:id', function (req, res) {
       var id = req.params.id;
 
-      mongoose.model('Note').findOne({ _id: id })
+      Note.findOne({ _id: id })
         .catch(function(err) {
           console.error(err);
           res.sendStatus(404);
@@ -32,7 +34,7 @@ module.exports = function(app) {
     });
 
     app.post('/note', function (req, res) {
-      var newNote = new mongoose.model('Note')(req.body);
+      var newNote = new Note(req.body);
 
       newNote.save()
         .catch(function(err) {
@@ -47,7 +49,7 @@ module.exports = function(app) {
     app.delete('/note/:id', function (req, res) {
       var id = req.params.id;
 
-      mongoose.model('Note').deleteOne({ _id: id })
+      Note.deleteOne({ _id: id })
         .catch(function(err) {
           console.error(err);
           res.sendStatus(404);
