@@ -25,10 +25,9 @@ app.use(cors());
 passport.use(new Strategy(
   {
     secretOrKey: process.env.JWT_SECRET,
-    jwtFromRequest: ExtractJwt.fromAuthHeader()
+    jwtFromRequest: ExtractJwt.fromAuthHeader(),
   },
   function(payload, done) {
-    console.log('strategy')
     var user = mongoose.model('User').findOne({ _id: payload.username }) || null;
     if (user) {
       return done(null, {

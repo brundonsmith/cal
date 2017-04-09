@@ -1,60 +1,19 @@
 
 var mongoose = require('mongoose');
-var passport = require('passport');
+var crud = require('./_basic_crud');
 
 const Calendar = mongoose.model('Calendar');
 
 module.exports = function(app) {
 
-  app.get('/calendar/all', function (req, res) {
+  crud.defineReadAll(Calendar, app);
 
-    Calendar.find()
-      .catch(function(err) {
-        console.error(err);
-        res.sendStatus(500);
-      })
-      .then(function(calendars) {
-        res.json(calendars);
-      });
-  });
+  crud.defineRead(Calendar, app);
 
-  app.get('/calendar/:id', function (req, res) {
-    var id = req.params.id;
+  crud.defineCreate(Calendar, app);
 
-    Calendar.findOne({ _id: id })
-      .catch(function(err) {
-        console.error(err);
-        res.sendStatus(404);
-      })
-      .then(function(calendar) {
-        res.json(calendar);
-      });
-  });
+  crud.defineUpdate(Calendar, app);
 
-  app.post('/calendar', passport.authenticate("jwt", { session: false }), function (req, res) {
-    var newCalendar = new Calendar(req.body);
-
-    newCalendar.save()
-      .catch(function(err) {
-        console.error(err);
-        res.sendStatus(500);
-      })
-      .then(function() {
-        res.sendStatus(200);
-      });
-  });
-
-  app.delete('/calendar/:id', function (req, res) {
-    var id = req.params.id;
-
-    Calendar.deleteOne({ _id: id })
-      .catch(function(err) {
-        console.error(err);
-        res.sendStatus(404);
-      })
-      .then(function(result) {
-        res.json(result);
-      });
-  });
+  crud.defineDelete(Calendar, app);
 
 };

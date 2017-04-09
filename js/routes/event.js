@@ -1,14 +1,23 @@
 
 var mongoose = require('mongoose');
+var middleware = require('../middleware');
+
 const Calendar = mongoose.model('Calendar');
 const Event = mongoose.model('Event');
 
 module.exports = function(app) {
 
-  app.get('/calendar/:calendarId/event/all', function(req, res) {
+  app.get('/calendar/:calendarId/event/all', middleware.authenticate, middleware.decodeSession, function(req, res) {
     var calendarId = req.params.calendarId;
 
-    Event.find({ calendar_id: calendarId })
+    Calendar.findOne({ calendar_id: calendarId, user_id: req.username })
+      .then(function(calendar) {
+        if(calendar) {
+          return Event.find({ calendar_id: calendarId });
+        } else {
+          res.sendStatus(404);
+        }
+      })
       .catch(function(err) {
         console.error(err);
         res.sendStatus(404);
@@ -18,11 +27,18 @@ module.exports = function(app) {
       });
   });
 
-  app.get('/calendar/:calendarId/event/all/:eventId', function(req, res) {
+  app.get('/calendar/:calendarId/event/:eventId', middleware.authenticate, middleware.decodeSession, function(req, res) {
     var calendarId = req.params.calendarId;
     var eventId = req.params.eventId;
 
-    Event.find({ _id: eventId, calendar_id: calendarId })
+    Calendar.findOne({ calendar_id: calendarId, user_id: req.username })
+      .then(function(calendar) {
+        if(calendar) {
+          return Event.findOne({ _id: eventId, calendar_id: calendarId });
+        } else {
+          res.sendStatus(404);
+        }
+      })
       .catch(function(err) {
         console.error(err);
         res.sendStatus(404);
@@ -32,21 +48,17 @@ module.exports = function(app) {
       });
   });
 
-  app.post('/calendar/:calendarId/event', function(req, res) {
+  app.post('/calendar/:calendarId/event', middleware.authenticate, middleware.decodeSession, function(req, res) {
     var calendarId = req.params.calendarId;
 
-    Calendar.findOne({ _id: calendarId })
-      .catch(function(err) {
-        console.error(err);
-        res.sendStatus(404);
-      })
+    Calendar.findOne({ _id: calendarId, user_id: req.username })
       .then(function(calendar) {
-        if(calendar === null) {
-          res.sendStatus(404);
-        } else {
+        if(calendar) {
           var newEvent = new Event(req.body);
           newEvent.calendar_id = calendarId;
           return newEvent.save();
+        } else {
+          res.sendStatus(404);
         }
       })
       .catch(function(err) {
@@ -58,24 +70,16 @@ module.exports = function(app) {
       });
   });
 
-  app.delete('/calendar/:calendarId/event/:eventId', function(req, res) {
+  app.delete('/calendar/:calendarId/event/:eventId', middleware.authenticate, middleware.decodeSession, function(req, res) {
     var calendarId = req.params.calendarId;
     var eventId = req.params.eventId;
 
-    Calendar.findOne({ _id: id })
-      .catch(function(err) {
-        console.error(err);
-        res.sendStatus(404);
-      })
+    Calendar.findOne({ _id: calendarId, user_id: req.username })
       .then(function(calendar) {
-        if(calendar === null) {
-          res.sendStatus(404);
+        if(calendar) {
+          return Event.deleteOne({ _id: eventId, calendar_id: calendarId })
         } else {
-          var event = Event.deleteOne({ _id: eventId })
-            .catch(function(err) {
-              console.error(err);
-              res.sendStatus(404);
-            });
+          res.sendStatus(404);
         }
       })
       .catch(function(err) {
