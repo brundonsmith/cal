@@ -22,7 +22,8 @@ app.use(bodyParser.urlencoded({
 app.use(cors({
   origin: '*',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  preflightContinue: true
 }));
 
 // passport
