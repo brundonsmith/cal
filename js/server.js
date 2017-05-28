@@ -19,7 +19,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200
+}));
 
 // passport
 passport.use(new Strategy(
