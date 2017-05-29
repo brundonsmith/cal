@@ -37,7 +37,10 @@ class Notes extends React.Component {
             }
           }}
           searchValue={this.model.searchString}
-          onSearchChange={(val) => this.model.searchString = val} />
+          onSearchChange={(val) => {
+            this.model.searchString = val;
+            this.model.listOpen = true;
+          }} />
 
         <div className="main-container">
           <div className="notes-list">
@@ -46,13 +49,15 @@ class Notes extends React.Component {
               New note
             </div>
             {this.model.notes
-              .filter((note) => note.content.toLowerCase().includes(this.model.searchString.toLowerCase()))
               .map((note, index) =>
-                <NotePreview note={note} key={note._id} onSelect={(note) => {
-                    this.model.selectedNoteIndex = index;
-                    this.model.listOpen = false;
-                    this.clearEmptyNotes();
-                  }} /> )}
+                note.content.toLowerCase().includes(this.model.searchString.toLowerCase()) ?
+                  <NotePreview note={note} key={note._id} onSelect={(note) => {
+                      this.model.selectedNoteIndex = index;
+                      this.model.listOpen = false;
+                      this.clearEmptyNotes();
+                    }} />
+                : null
+              )}
           </div>
           <div className="current-note" onClick={() => this.model.listOpen = false}>
             {this.model.notes[this.model.selectedNoteIndex] ?
