@@ -2,4 +2,7 @@
 node_modules
 npm-debug.log
 
+public/App.js
+public/App.css
+
 dev.sh
