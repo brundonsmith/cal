@@ -11,21 +11,28 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      mode: 'notes'
     };
   }
 
   componentDidMount() {
     if(window.location.hash) {
+      var firstSlash = window.location.hash.indexOf('/');
+      var secondSlash = firstSlash + 1 + window.location.hash.substr(firstSlash + 1).indexOf('/');
+      secondSlash = secondSlash > -1 ? secondSlash : window.location.hash.length;
+
       this.setState({
-        mode: window.location.hash.substr(1),
+        mode: window.location.hash.substring(firstSlash + 1, secondSlash),
       });
     }
 
-    window.onhashchange = function() {
+    window.onhashchange = () => {
       if(window.location.hash) {
+        var firstSlash = window.location.hash.indexOf('/');
+        var secondSlash = firstSlash + 1 + window.location.hash.substr(firstSlash + 1).indexOf('/');
+        secondSlash = secondSlash > -1 ? secondSlash : window.location.hash.length;
+
         this.setState({
-          mode: window.location.hash.substr(1),
+          mode: window.location.hash.substring(firstSlash + 1, secondSlash),
         });
       }
     };

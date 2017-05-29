@@ -22,7 +22,12 @@ class Notes extends React.Component {
 	}
 
   componentDidMount() {
-    this.refreshNotes();
+    this.refreshNotes()
+      .then(() => {
+        if(window.location.hash) {
+          this.model.selectedNoteIndex = this.model.notes.findIndex((note) => note._id === window.location.hash.substr('#/notes/'.length));
+        }
+      });
   }
 
   render() {
@@ -53,6 +58,7 @@ class Notes extends React.Component {
                 note.content.toLowerCase().includes(this.model.searchString.toLowerCase()) ?
                   <NotePreview note={note} key={note._id} onSelect={(note) => {
                       this.model.selectedNoteIndex = index;
+                      window.location.hash = `#/notes/${note._id}`;
                       this.model.listOpen = false;
                       this.clearEmptyNotes();
                     }} />
