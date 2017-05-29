@@ -15,11 +15,12 @@ var Strategy = passportJWT.Strategy;
 var app = express();
 
 // middleware
+app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(cors());
+//app.use(cors());
 
 // passport
 passport.use(new Strategy(

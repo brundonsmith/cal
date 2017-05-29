@@ -62,7 +62,7 @@ module.exports = {
         .then(function(object) {
           if(object) {
             object = Object.assign(object, req.body);
-            return object.save();
+            return object.save().then(() => res.json(object));
           } else {
             res.sendStatus(404);
           }

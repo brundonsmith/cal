@@ -25,8 +25,9 @@ module.exports = function(app) {
           user_id: req.username,
         }
       }
-      
+
       Note.find(criteria)
+        .sort([ ['date', -1] ])
         .catch(function(err) {
           console.error(err);
           res.sendStatus(500);

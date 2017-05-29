@@ -1,0 +1,208 @@
+body {
+  margin: 0; }
+
+* {
+  box-sizing: border-box;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out; }
+
+input {
+  font-size: inherit;
+  appearance: none; }
+  input:focus {
+    outline: none; }
+
+textarea {
+  font-size: inherit;
+  appearance: none; }
+  textarea:focus {
+    outline: none; }
+
+button {
+  font-size: inherit;
+  appearance: none; }
+  button:focus {
+    outline: none; }
+
+.component-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+  color: white;
+  background-color: var(--color-primary);
+  z-index: 100; }
+  .component-nav > [class*="-button"] {
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-size: 32px;
+    cursor: pointer; }
+  .component-nav > .title,
+  .component-nav > .search {
+    flex-basis: 0;
+    flex-shrink: 1;
+    overflow: hidden; }
+  .component-nav > .title {
+    flex-grow: 1;
+    font-size: 22px;
+    margin-left: 15px; }
+  .component-nav > .search {
+    flex-grow: 0; }
+    .component-nav > .search > input {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid white;
+      --webkit-appearance: none;
+      color: white;
+      padding: 8px; }
+  .component-nav.searching > .title {
+    flex-grow: 0; }
+  .component-nav.searching > .search {
+    flex-grow: 1; }
+  @media (min-width: 970px) {
+    .component-nav > .menu-button {
+      display: none; } }
+
+.component-calendar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+  border-left: 3px solid black; }
+  .component-calendar > .component-month {
+    width: 100vmin;
+    height: 100vmin; }
+
+.component-day {
+  outline: 1px solid black;
+  width: calc(100% / 7);
+  padding: 10px;
+  background: white; }
+  .component-day > .number {
+    float: right;
+    font-size: 32px;
+    user-select: none;
+    cursor: default; }
+  .component-day.out-of-focus {
+    background: #f0f0f0;
+    color: rgba(0, 0, 0, 0.5); }
+
+.component-month {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap;
+  /*
+  display: grid;
+  grid-template-columns: 14.2857142857143% 14.2857142857143% 14.2857142857143% 14.2857142857143% 14.2857142857143% 14.2857142857143% 14.2857142857143%;
+  grid-template-rows: 25% 25% 25% 25%;
+  grid-gap: 1px;
+*/ }
+
+.component-notes {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  --color-primary: #2196F3;
+  --slide-out-width: 200px; }
+  .component-notes > .component-nav {
+    flex-shrink: 0;
+    flex-grow: 0; }
+  .component-notes > .main-container {
+    position: relative;
+    flex-shrink: 1;
+    flex-grow: 1; }
+    .component-notes > .main-container > .notes-list {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      width: var(--slide-out-width); }
+      .component-notes > .main-container > .notes-list > .new-note {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        user-select: none;
+        cursor: default;
+        border-bottom: 1px solid var(--color-divider);
+        color: var(--color-text-secondary); }
+        .component-notes > .main-container > .notes-list > .new-note > i {
+          margin-right: 15px; }
+        .component-notes > .main-container > .notes-list > .new-note:hover, .component-notes > .main-container > .notes-list > .new-note:active {
+          background-color: var(--color-background-1); }
+    .component-notes > .main-container > .current-note {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+      overflow-y: auto; }
+  .component-notes.list-open > .main-container > .current-note {
+    left: var(--slide-out-width); }
+  @media (min-width: 970px) {
+    .component-notes > .main-container {
+      display: flex;
+      align-items: stretch; }
+      .component-notes > .main-container > .notes-list {
+        flex-grow: 0;
+        flex-shrink: 0; }
+      .component-notes > .main-container > .current-note {
+        position: static;
+        flex-grow: 1;
+        flex-shrink: 1;
+        box-shadow: none;
+        height: auto;
+        border-left: 1px solid var(--color-divider); } }
+
+.component-note-preview {
+  padding: 12px;
+  user-select: none;
+  cursor: default;
+  border-bottom: 1px solid var(--color-divider); }
+  .component-note-preview > .title {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 1em; }
+  .component-note-preview > .body {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 1em;
+    color: var(--color-text-secondary); }
+  .component-note-preview:hover, .component-note-preview:active {
+    background-color: var(--color-background-1); }
+
+.component-note-full {
+  padding: 20px; }
+  .component-note-full > textarea.content {
+    word-break: break-word;
+    white-space: pre-wrap;
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    font-family: inherit;
+    appearance: none; }
+
+.component-app {
+  font-family: 'Roboto';
+  height: 100vh;
+  width: 100vw;
+  color: var(--color-text-primary);
+  background: var(--color-background-3);
+  overflow: hidden;
+  --color-text-primary: rgba(0, 0, 0, 0.87);
+  --color-text-secondary: rgba(0, 0, 0, 0.54);
+  --color-divider: rgba(0, 0, 0, 0.12);
+  --color-background-1: #e0e0e0;
+  --color-background-2: #f5f5f5;
+  --color-background-3: #fafafa;
+  --color-background-4: #ffffff; }
+  .component-app > * {
+    width: 100%; }

@@ -1,0 +1,27 @@
+
+.component-note-preview {
+  padding:12px;
+  user-select:none;
+  cursor:default;
+  border-bottom:1px solid var(--color-divider);
+
+  > .title {
+    font-weight:bold;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    min-height:1em;
+  }
+  > .body {
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    min-height:1em;
+    color:var(--color-text-secondary);
+  }
+
+  &:hover,
+  &:active {
+    background-color: var(--color-background-1);
+  }
+}

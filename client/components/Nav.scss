@@ -1,0 +1,65 @@
+
+.component-nav {
+  display:flex;
+  align-items:center;
+
+  width:100%;
+  padding:15px;
+  color:white;
+  background-color: var(--color-primary);
+  z-index:100;
+
+  > [class*="-button"] {
+    flex-grow:0;
+    flex-shrink:0;
+    font-size:32px;
+    cursor:pointer;
+  }
+  > .menu-button {
+  }
+  > .search-button {
+  }
+
+  > .title,
+  > .search {
+    flex-basis:0;
+    flex-shrink:1;
+    overflow:hidden;
+  }
+
+  > .title {
+    flex-grow:1;
+    font-size:22px;
+    margin-left:15px;
+  }
+
+  > .search {
+    flex-grow:0;
+
+    > input {
+      background:transparent;
+      border:none;
+      border-bottom:2px solid white;
+      --webkit-appearance: none;
+      color:white;
+      padding:8px;
+
+    }
+  }
+
+  &.searching {
+    > .title {
+      flex-grow:0;
+    }
+    > .search {
+      flex-grow:1;
+    }
+  }
+
+  @media(min-width:970px) {
+
+    > .menu-button {
+      display:none;
+    }
+  }
+}

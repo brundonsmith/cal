@@ -1,0 +1,13 @@
+.component-calendar {
+  display: flex;
+  justify-content:flex-end;
+  align-items:stretch;
+  height:100%;
+  width:100%;
+  border-left:3px solid black;
+
+  > .component-month {
+    width:100vmin;
+    height:100vmin;
+  }
+}

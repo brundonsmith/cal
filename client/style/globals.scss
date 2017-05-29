@@ -1,0 +1,36 @@
+
+
+body { margin: 0; }
+
+* {
+  box-sizing: border-box;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+
+input {
+  font-size:inherit;
+  appearance:none;
+
+  &:focus {
+    outline:none;
+  }
+}
+
+textarea {
+  font-size:inherit;
+  appearance:none;
+
+  &:focus {
+    outline:none;
+  }
+}
+
+button {
+  font-size:inherit;
+  appearance:none;
+
+  &:focus {
+    outline:none;
+  }
+}
