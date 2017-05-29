@@ -21,7 +21,8 @@
   }
 
   &:hover,
-  &:active {
+  &:active,
+  &.selected {
     background-color: var(--color-background-1);
   }
 }

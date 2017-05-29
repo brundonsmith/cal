@@ -56,7 +56,7 @@ class Notes extends React.Component {
             {this.model.notes
               .map((note, index) =>
                 note.content.toLowerCase().includes(this.model.searchString.toLowerCase()) ?
-                  <NotePreview note={note} key={note._id} onSelect={(note) => {
+                  <NotePreview note={note} key={note._id} selected={this.model.selectedNoteIndex === index} onSelect={(note) => {
                       this.model.selectedNoteIndex = index;
                       window.location.hash = `#/notes/${note._id}`;
                       this.model.listOpen = false;

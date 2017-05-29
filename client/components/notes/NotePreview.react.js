@@ -11,7 +11,7 @@ class NotePreview extends React.Component {
 
   render() {
     return (
-      <div className={`component-note-preview`} onClick={() => this.props.onSelect(this.props.note)}>
+      <div className={`component-note-preview ${this.props.selected ? 'selected' : ''}`} onClick={() => this.props.onSelect(this.props.note)}>
         <div className="title">{this.getNoteTitle()}</div>
         {this.props.note.isMarkdown
           ? <div className="body" __dangerouslySetInnerHtml={{ html: marked(this.getNoteBody()) }}></div>
