@@ -45,12 +45,14 @@ class Notes extends React.Component {
               <i className="material-icons">add_circle_outline</i>
               New note
             </div>
-            {this.model.notes.map((note, index) =>
-              <NotePreview note={note} key={note._id} onSelect={(note) => {
-                  this.model.selectedNoteIndex = index;
-                  this.model.listOpen = false;
-                  this.clearEmptyNotes();
-                }} /> )}
+            {this.model.notes
+              .filter((note) => note.content.toLowerCase().includes(this.model.searchString.toLowerCase()))
+              .map((note, index) =>
+                <NotePreview note={note} key={note._id} onSelect={(note) => {
+                    this.model.selectedNoteIndex = index;
+                    this.model.listOpen = false;
+                    this.clearEmptyNotes();
+                  }} /> )}
           </div>
           <div className="current-note" onClick={() => this.model.listOpen = false}>
             {this.model.notes[this.model.selectedNoteIndex] ?

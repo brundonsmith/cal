@@ -26,10 +26,15 @@ class Nav extends React.Component {
 
         <div className="search">
           <input
-            onChange={(e) => this.props.onSearchChange(e.target.value)} />
+            ref={(el) => this.searchInput = el}
+            onChange={(e) => this.props.onSearchChange(e.target.value)}
+            onBlur={(e) => this.setState({ searching: false })} />
         </div>
 
-        <i className="search-button material-icons" onClick={() => this.setState({ searching: !this.state.searching })}>
+        <i className="search-button material-icons" onClick={() => {
+            this.setState({ searching: !this.state.searching })
+            this.searchInput.focus();
+          }}>
           search
         </i>
 

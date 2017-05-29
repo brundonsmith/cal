@@ -40,7 +40,7 @@ class NoteFull extends React.Component {
           className="content"
           ref={(el) => {
             if(el) {
-              el.style.height = `calc(${el.scrollHeight}px + 1em)`;
+              el.style.height = `calc(2 * ${el.scrollHeight}px - 1em)`;
             }
           }}
           value={this.model.noteContent}
