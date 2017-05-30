@@ -1,13 +1,29 @@
+@import '../../style/globals';
+
+@import '../helpers/Login';
+@import '../helpers/Nav';
+
+@import './Day';
+
 .component-calendar {
   display: flex;
-  justify-content:flex-end;
+  flex-direction:column;
   align-items:stretch;
-  height:100%;
   width:100%;
-  border-left:3px solid black;
+  height: 100%;
 
-  > .component-month {
-    width:100vmin;
-    height:100vmin;
+  --color-primary: #3F51B5;
+
+  > .main-container {
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:stretch;
+    flex-wrap:wrap;
+
+    position:relative;
+    flex-shrink:1;
+    flex-grow:1;
+    height: 0;
   }
 }

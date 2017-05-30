@@ -16,6 +16,7 @@ class Notes extends React.Component {
     super(props);
 
     this.model = new Model(this, {
+      loginOpen: false,
       searchString: '',
       listOpen: false,
       selectedNoteIndex: 0,

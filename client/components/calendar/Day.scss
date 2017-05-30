@@ -1,19 +1,21 @@
 
 .component-day {
-  outline: 1px solid black;
+  outline: 1px solid var(--color-divider);
   width: calc(100% / 7);
+  height: calc(100% / 5);
   padding:10px;
-  background:white;
+  background:var(--color-background-4);
+  color:var(--color-text-primary);
 
   > .number {
     float:right;
-    font-size:32px;
+    font-size:26px;
     user-select:none;
     cursor:default;
   }
 
   &.out-of-focus {
-    background:#f0f0f0;
-    color:rgba(0, 0, 0, 0.5);
+    background:var(--color-background-2);
+    color:var(--color-text-secondary);
   }
 }

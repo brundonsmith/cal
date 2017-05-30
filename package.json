@@ -7,7 +7,7 @@
     "build:style": "node-sass client/components/notes/Notes.scss public/notes.css ; node-sass client/components/calendar/Calendar.scss public/calendar.css ; node-sass client/components/contacts/Contacts.scss public/contacts.css",
     "build:js": "webpack",
     "build": "npm run build:style && npm run build:js",
-    "watch:style": "node-sass --watch client/components/notes/Notes.scss public/notes.css ; node-sass --watch client/components/calendar/Calendar.scss public/calendar.css ; node-sass --watch client/components/contacts/Contacts.scss public/contacts.css",
+    "watch:style": "parallelshell \"node-sass --watch client/components/notes/Notes.scss public/notes.css\" \"node-sass --watch client/components/calendar/Calendar.scss public/calendar.css\" \"node-sass --watch client/components/contacts/Contacts.scss public/contacts.css\"",
     "watch:js": "webpack --watch",
     "watch": "parallelshell \"npm run watch:style\" \"npm run watch:js\"",
     "start": "npm run build ; node server/server.js",

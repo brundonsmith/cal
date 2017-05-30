@@ -1,14 +1,14 @@
 
 import React from 'react';
 
-const Day = React.createClass({
+class Day extends React.Component {
 
-  getInitialState: function() {
-    return {
-    };
-	},
+  constructor(props) {
+    super(props);
 
-  render: function() {
+  }
+
+  render() {
     return (
       <div className={`component-day ${this.props.outOfFocus ? 'out-of-focus' : ''}`}>
         <div className="number">{this.props.date.getDate()}</div>
@@ -17,7 +17,8 @@ const Day = React.createClass({
         </div>
       </div>
     );
-	},
+	}
 
-})
+}
+
 export default Day;
