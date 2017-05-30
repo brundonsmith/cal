@@ -1,29 +1,22 @@
 
-var apiRoot = 'http://localhost:8080';//'https://shielded-wave-87292.herokuapp.com';
-
-var headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'JWT ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmlwZXMiLCJzYWx0IjoiMTk0NDQxNTcxMzIyMjE1Njg5MjIwMjgyMTE1NTIwNzk1MjA3MjM4MTcyIn0.GSx36LDSBpjr6gfB-rEkzAMefy6sZxFAXDjgiYuefBs',
-};
+var headers = require('utilities').headers;
 
 module.exports = {
 
   getAllCalendars: function() {
-    return fetch(`${apiRoot}/api/calendar/all`, { method: 'GET', headers: headers })
-      .then((response) => response.json())
+    return fetch(`${apiRoot}/api/calendar/all`, { method: 'GET', headers: headers() })
   },
 
   getCalendar: function(calendarId) {
-    return fetch(`${apiRoot}/api/calendar/${calendarId}`, { method: 'GET', headers: headers })
-      .then((response) => response.json())
+    return fetch(`${apiRoot}/api/calendar/${calendarId}`, { method: 'GET', headers: headers() })
   },
 
   createCalendar: function(calendar) {
-    return fetch(`${apiRoot}/api/calendar`, { method: 'POST', headers: headers, body: JSON.stringify(calendar) });
+    return fetch(`${apiRoot}/api/calendar`, { method: 'POST', headers: headers(), body: JSON.stringify(calendar) });
   },
 
   deleteCalendar: function(calendarId) {
-    return fetch(`${apiRoot}/api/calendar/${calendarId}`, { method: 'DELETE', headers: headers });
+    return fetch(`${apiRoot}/api/calendar/${calendarId}`, { method: 'DELETE', headers: headers() });
   },
 
 };

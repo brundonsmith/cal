@@ -37,12 +37,8 @@
     flex-grow:0;
 
     > input {
-      background:transparent;
-      border:none;
-      border-bottom:2px solid white;
-      --webkit-appearance: none;
+      border-color: white;
       color:white;
-      padding:8px;
       width:300px;
     }
   }

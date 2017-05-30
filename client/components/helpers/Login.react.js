@@ -33,15 +33,13 @@ class Login extends React.Component {
 	}
 
   handleSubmitButtonClick() {
-    api.login.authenticate(this.state.username, this.state.password)
+    api.authenticate.login(this.state.username, this.state.password)
       .then((response) => {
-        console.log(response)
         if(response.ok) {
           return response.json();
         }
       })
       .then((response) => {
-        console.log(response)
         if(response) {
           this.props.onLoginSuccessful(response.token);
         }

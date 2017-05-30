@@ -24,12 +24,7 @@ class Notes extends React.Component {
 	}
 
   componentDidMount() {
-    this.refreshNotes()
-      .then(() => {
-        if(window.location.hash) {
-          this.model.selectedNoteIndex = this.model.notes.findIndex((note) => note._id === window.location.hash.substr(1));
-        }
-      });
+    this.refreshNotes();
   }
 
   render() {
@@ -40,12 +35,7 @@ class Notes extends React.Component {
           onLoginSuccessful={(token) => {
             window.localStorage.setItem('jwt_token', token);
             this.model.loginOpen = false;
-            this.refreshNotes()
-              .then(() => {
-                if(window.location.hash) {
-                  this.model.selectedNoteIndex = this.model.notes.findIndex((note) => note._id === window.location.hash.substr(1));
-                }
-              });
+            this.refreshNotes();
           }} />
 
         <Nav
@@ -97,9 +87,11 @@ class Notes extends React.Component {
         date: new Date().valueOf(),
       })
       .then(() => {
-        this.refreshNotes();
-        this.model.listOpen = false;
-        this.model.selectedNoteIndex = 0;
+        this.refreshNotes()
+          .then(() => {
+            this.model.listOpen = false;
+            this.model.selectedNoteIndex = 0;
+          });
       });
   }
 
@@ -115,7 +107,10 @@ class Notes extends React.Component {
       })
       .then((notes) => {
         this.model.notes = notes;
-      });
+        if(window.location.hash) {
+          this.model.selectedNoteIndex = this.model.notes.findIndex((note) => note._id === window.location.hash.substr(1));
+        }
+      })
   }
 
   clearEmptyNotes() {

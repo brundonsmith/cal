@@ -13,4 +13,11 @@ function debounce(func, wait, immediate) {
 	};
 };
 
-export { debounce };
+function headers() {
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `JWT ${window.localStorage.getItem('jwt_token')}`
+  };
+};
+
+export { debounce, headers };
