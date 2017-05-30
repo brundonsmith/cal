@@ -1,6 +1,5 @@
 
 import React from 'react';
-import marked from 'marked';
 
 class NotePreview extends React.Component {
 
@@ -13,9 +12,7 @@ class NotePreview extends React.Component {
     return (
       <div className={`component-note-preview ${this.props.selected ? 'selected' : ''}`} onClick={() => this.props.onSelect(this.props.note)}>
         <div className="title">{this.getNoteTitle()}</div>
-        {this.props.note.isMarkdown
-          ? <div className="body" __dangerouslySetInnerHtml={{ html: marked(this.getNoteBody()) }}></div>
-          : <div className="body">{this.getNoteBody()}</div>}
+        <div className="body">{this.getNoteBody()}</div>
       </div>
     );
 	}

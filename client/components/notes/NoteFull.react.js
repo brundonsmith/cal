@@ -1,6 +1,5 @@
 
 import React from 'react';
-import marked from 'marked';
 import Model from 'mutable-model';
 import api from 'api';
 import { debounce } from 'utilities';

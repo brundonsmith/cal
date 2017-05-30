@@ -7,18 +7,8 @@ var headers = {
 
 module.exports = {
 
-  login: function(username, password) {
-    return fetch(`${apiRoot}/api/login`, { method: 'POST', headers: headers })
-      .then((response) => response.json())
-      .then((response) => {
-
-      });
-  },
-
-  logout: function(noteId) {
-    return fetch(`${apiRoot}/api/note/${noteId}`, { method: 'GET', headers: headers })
-      .then(loginRedirect)
-      .then((response) => response.json())
+  authenticate: function(username, password) {
+    return fetch(`${apiRoot}/api/authenticate`, { method: 'POST', headers: headers, body: JSON.stringify({ username, password }) })
   },
 
 };

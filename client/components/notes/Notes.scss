@@ -1,6 +1,7 @@
 @import '../../style/globals';
 
-@import '../Nav';
+@import '../helpers/Login';
+@import '../helpers/Nav';
 
 @import './NotePreview';
 @import './NoteFull';

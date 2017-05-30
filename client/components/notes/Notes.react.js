@@ -4,10 +4,11 @@ import ReactDOM from 'react-dom';
 import Model from 'mutable-model';
 import api from 'api';
 
-import Nav from 'Nav';
+import Login from 'helpers/Login';
+import Nav from 'helpers/Nav';
 
-import NotePreview from './NotePreview';
-import NoteFull from './NoteFull';
+import NotePreview from 'notes/NotePreview';
+import NoteFull from 'notes/NoteFull';
 
 class Notes extends React.Component {
 
@@ -34,6 +35,19 @@ class Notes extends React.Component {
   render() {
     return (
       <div className={`component-notes ${this.model.listOpen ? 'list-open' : ''}`}>
+        <Login
+          open={this.model.loginOpen}
+          onLoginSuccessful={(token) => {
+            window.localStorage.setItem('jwt_token', token);
+            this.model.loginOpen = false;
+            this.refreshNotes()
+              .then(() => {
+                if(window.location.hash) {
+                  this.model.selectedNoteIndex = this.model.notes.findIndex((note) => note._id === window.location.hash.substr(1));
+                }
+              });
+          }} />
+
         <Nav
           title="Notes"
           onMenuButtonClick={() => {
@@ -91,6 +105,14 @@ class Notes extends React.Component {
 
   refreshNotes() {
     return api.note.getAllNotes()
+      .then((response) => {
+        if(response.status === 401) {
+          this.model.loginOpen = true;
+          return [];
+        } else {
+          return response.json();
+        }
+      })
       .then((notes) => {
         this.model.notes = notes;
       });
