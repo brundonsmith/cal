@@ -1,6 +1,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import api from 'api';
 
 import Model from 'mutable-model';
 
