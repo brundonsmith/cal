@@ -5,7 +5,7 @@ const User = mongoose.model('User');
 
 module.exports = function(app) {
 
-  app.post('/user', function (req, res) {
+  app.post('/api/user', function (req, res) {
     var username = req.body.username;
     req.body.username = undefined;
     var password = req.body.password;

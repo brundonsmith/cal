@@ -7,7 +7,7 @@ const Event = mongoose.model('Event');
 
 module.exports = function(app) {
 
-  app.get('/calendar/:calendarId/event/all', middleware.authenticate, middleware.decodeSession, function(req, res) {
+  app.get('/api/calendar/:calendarId/event/all', middleware.authenticate, middleware.decodeSession, function(req, res) {
     var calendarId = req.params.calendarId;
 
     Calendar.findOne({ calendar_id: calendarId, user_id: req.username })
@@ -27,7 +27,7 @@ module.exports = function(app) {
       });
   });
 
-  app.get('/calendar/:calendarId/event/:eventId', middleware.authenticate, middleware.decodeSession, function(req, res) {
+  app.get('/api/calendar/:calendarId/event/:eventId', middleware.authenticate, middleware.decodeSession, function(req, res) {
     var calendarId = req.params.calendarId;
     var eventId = req.params.eventId;
 
@@ -48,7 +48,7 @@ module.exports = function(app) {
       });
   });
 
-  app.post('/calendar/:calendarId/event', middleware.authenticate, middleware.decodeSession, function(req, res) {
+  app.post('/api/calendar/:calendarId/event', middleware.authenticate, middleware.decodeSession, function(req, res) {
     var calendarId = req.params.calendarId;
 
     Calendar.findOne({ _id: calendarId, user_id: req.username })
@@ -70,7 +70,7 @@ module.exports = function(app) {
       });
   });
 
-  app.delete('/calendar/:calendarId/event/:eventId', middleware.authenticate, middleware.decodeSession, function(req, res) {
+  app.delete('/api/calendar/:calendarId/event/:eventId', middleware.authenticate, middleware.decodeSession, function(req, res) {
     var calendarId = req.params.calendarId;
     var eventId = req.params.eventId;
 

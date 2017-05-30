@@ -1,3 +1,9 @@
+@import '../../style/globals';
+
+@import '../Nav';
+
+@import './NotePreview';
+@import './NoteFull';
 
 .component-notes {
   display: flex;
@@ -17,11 +23,11 @@
     position:relative;
     flex-shrink:1;
     flex-grow:1;
+    height: 0;
 
     > .notes-list {
-      display:flex;
-      flex-direction:column;
       overflow-y:auto;
+      height:100%;
 
       width:var(--slide-out-width);
 

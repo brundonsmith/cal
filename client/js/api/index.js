@@ -1,5 +1,6 @@
 
 module.exports = {
-  calendar: require('./calendar'),
+  login: require('./login'),
   note: require('./note'),
-}
+  calendar: require('./calendar'),
+};

@@ -2,8 +2,8 @@
 import React from 'react';
 import marked from 'marked';
 import Model from 'mutable-model';
-import api from 'js/api';
-import { debounce } from 'js/utilities';
+import api from 'api';
+import { debounce } from 'utilities';
 
 class NoteFull extends React.Component {
 

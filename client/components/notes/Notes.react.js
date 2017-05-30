@@ -1,9 +1,10 @@
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Model from 'mutable-model';
-import api from 'js/api';
+import api from 'api';
 
-import Nav from '../Nav';
+import Nav from 'Nav';
 
 import NotePreview from './NotePreview';
 import NoteFull from './NoteFull';
@@ -25,7 +26,7 @@ class Notes extends React.Component {
     this.refreshNotes()
       .then(() => {
         if(window.location.hash) {
-          this.model.selectedNoteIndex = this.model.notes.findIndex((note) => note._id === window.location.hash.substr('#/notes/'.length));
+          this.model.selectedNoteIndex = this.model.notes.findIndex((note) => note._id === window.location.hash.substr(1));
         }
       });
   }
@@ -58,8 +59,9 @@ class Notes extends React.Component {
                 note.content.toLowerCase().includes(this.model.searchString.toLowerCase()) ?
                   <NotePreview note={note} key={note._id} selected={this.model.selectedNoteIndex === index} onSelect={(note) => {
                       this.model.selectedNoteIndex = index;
-                      window.location.hash = `#/notes/${note._id}`;
+                      window.location.hash = `#${note._id}`;
                       this.model.listOpen = false;
+                      this.model.searchString = '';
                       this.clearEmptyNotes();
                     }} />
                 : null
@@ -99,5 +101,7 @@ class Notes extends React.Component {
   }
 
 }
+
+ReactDOM.render(<Notes />, document.getElementById('root'));
 
 export default Notes;

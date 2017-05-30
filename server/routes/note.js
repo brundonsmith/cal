@@ -8,7 +8,7 @@ const Note = mongoose.model('Note');
 module.exports = function(app) {
 
     //crud.defineReadAll(Note, app);
-    app.get('/note/all', middleware.authenticate, middleware.decodeSession, function (req, res) {
+    app.get('/api/note/all', middleware.authenticate, middleware.decodeSession, function (req, res) {
       var pageLength = req.query.pageLength;
       var pageNumber = req.query.pageNumber;
       var searchString = req.query.q;

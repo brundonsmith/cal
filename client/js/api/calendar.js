@@ -9,21 +9,21 @@ var headers = {
 module.exports = {
 
   getAllCalendars: function() {
-    return fetch(`${apiRoot}/calendar/all`, { method: 'GET', headers: headers })
+    return fetch(`${apiRoot}/api/calendar/all`, { method: 'GET', headers: headers })
       .then((response) => response.json())
   },
 
   getCalendar: function(calendarId) {
-    return fetch(`${apiRoot}/calendar/${calendarId}`, { method: 'GET', headers: headers })
+    return fetch(`${apiRoot}/api/calendar/${calendarId}`, { method: 'GET', headers: headers })
       .then((response) => response.json())
   },
 
   createCalendar: function(calendar) {
-    return fetch(`${apiRoot}/calendar`, { method: 'POST', headers: headers, body: JSON.stringify(calendar) });
+    return fetch(`${apiRoot}/api/calendar`, { method: 'POST', headers: headers, body: JSON.stringify(calendar) });
   },
 
   deleteCalendar: function(calendarId) {
-    return fetch(`${apiRoot}/calendar/${calendarId}`, { method: 'DELETE', headers: headers });
+    return fetch(`${apiRoot}/api/calendar/${calendarId}`, { method: 'DELETE', headers: headers });
   },
 
 };

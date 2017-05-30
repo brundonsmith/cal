@@ -1,5 +1,6 @@
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Month from './Month';
 
@@ -27,4 +28,7 @@ const Calendar = React.createClass({
 	},
 
 })
+
+ReactDOM.render(<Calendar />, document.getElementById('root'));
+
 export default Calendar;

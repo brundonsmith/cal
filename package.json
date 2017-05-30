@@ -4,18 +4,19 @@
   "description": "Homegrown calendar-as-a-service, mainly for my personal use.",
   "main": "server/server.js",
   "scripts": {
-    "build:style": "node-sass client/components/App.scss public/App.css",
+    "build:style": "node-sass client/components/notes/Notes.scss public/notes.css ; node-sass client/components/calendar/Calendar.scss public/calendar.css ; node-sass client/components/contacts/Contacts.scss public/contacts.css",
     "build:js": "webpack",
     "build": "npm run build:style && npm run build:js",
-    "watch:style": "node-sass --watch client/components/App.scss public/App.css",
+    "watch:style": "node-sass --watch client/components/notes/Notes.scss public/notes.css ; node-sass --watch client/components/calendar/Calendar.scss public/calendar.css ; node-sass --watch client/components/contacts/Contacts.scss public/contacts.css",
     "watch:js": "webpack --watch",
     "watch": "parallelshell \"npm run watch:style\" \"npm run watch:js\"",
     "start": "npm run build ; node server/server.js",
     "start:dev": "parallelshell \"npm run watch\" \"./dev.sh\""
   },
   "keywords": [
+    "notes",
     "calendar",
-    "service"
+    "contacts"
   ],
   "author": "Brandon Smith",
   "license": "ISC",
