@@ -7,7 +7,7 @@ var middleware = require('../middleware');
  */
 module.exports = {
   defineReadAll: function(model, app) {
-    app.get(`/${model.modelName.toLowerCase()}/all`, middleware.authenticate, middleware.decodeSession, function (req, res) {
+    app.get(`/api/${model.modelName.toLowerCase()}/all`, middleware.authenticate, middleware.decodeSession, function (req, res) {
       var pageLength = req.query.pageLength;
       var pageNumber = req.query.pageNumber;
       // TODO: Implement paging
@@ -24,7 +24,7 @@ module.exports = {
   },
 
   defineRead: function(model, app) {
-    app.get(`/${model.modelName.toLowerCase()}/:id`, middleware.authenticate, middleware.decodeSession, function (req, res) {
+    app.get(`/api/${model.modelName.toLowerCase()}/:id`, middleware.authenticate, middleware.decodeSession, function (req, res) {
       var id = req.params.id;
 
       model.findOne({ _id: id, user_id: req.username })
@@ -39,7 +39,7 @@ module.exports = {
   },
 
   defineCreate: function(model, app) {
-    app.post(`/${model.modelName.toLowerCase()}`, middleware.authenticate, middleware.decodeSession, function (req, res) {
+    app.post(`/api/${model.modelName.toLowerCase()}`, middleware.authenticate, middleware.decodeSession, function (req, res) {
       var newObj = new model(req.body);
       newObj.user_id = req.username;
 
@@ -55,7 +55,7 @@ module.exports = {
   },
 
   defineUpdate: function(model, app) {
-    app.put(`/${model.modelName.toLowerCase()}/:id`, middleware.authenticate, middleware.decodeSession, function (req, res) {
+    app.put(`/api/${model.modelName.toLowerCase()}/:id`, middleware.authenticate, middleware.decodeSession, function (req, res) {
       var id = req.params.id;
 
       model.findOne({ _id: id, user_id: req.username })
@@ -75,7 +75,7 @@ module.exports = {
   },
 
   defineDelete: function(model, app) {
-    app.delete(`/${model.modelName.toLowerCase()}/:id`, middleware.authenticate, middleware.decodeSession, function (req, res) {
+    app.delete(`/api/${model.modelName.toLowerCase()}/:id`, middleware.authenticate, middleware.decodeSession, function (req, res) {
       var id = req.params.id;
 
       model.deleteOne({ _id: id, user_id: req.username })
