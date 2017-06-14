@@ -8,7 +8,6 @@ const User = mongoose.model('User');
 module.exports = function(app) {
 
   app.post('/api/authenticate', function(req, res) {
-    console.log(req.body)
     if (req.body.username && req.body.password) {
       var username = req.body.username;
       var password = req.body.password;
