@@ -25,6 +25,7 @@ class Notes extends React.Component {
 	}
 
   componentDidMount() {
+    this.setState({ model: this.model })
     this.refreshNotes();
   }
 

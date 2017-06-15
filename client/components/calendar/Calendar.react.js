@@ -9,8 +9,14 @@ import Login from '../helpers/Login';
 import Nav from '../helpers/Nav';
 
 import Day from './Day';
+import Event from './Event';
 
 //import Month from './Month';
+
+function getAbsoluteDay(date) {
+  return (((date.getYear() * 12) + date.getMonth()) * 30) + date.getDate();
+}
+
 
 class Calendar extends React.Component {
 
@@ -26,13 +32,15 @@ class Calendar extends React.Component {
 	}
 
   componentWillMount() {
+    this.setState({ model: this.model })
     this.loadCalendars();
+
+    window.onhashchange = () => this.setState({});
   }
 
   render() {
     var days = [];
     var today = new Date();
-
 
     var startDate = new Date(this.model.currentYear, this.model.currentMonth, 0);
     startDate.setDate(startDate.getDate() - startDate.getDay());
@@ -47,6 +55,22 @@ class Calendar extends React.Component {
       dateIterator = new Date(dateIterator.valueOf());
       dateIterator.setDate(dateIterator.getDate() + 1);
     }
+
+    var events = this.model.calendars
+      .reduce((allEvents, calendar) => allEvents.concat(calendar.events.map((ev) => {
+        var clone = JSON.parse(JSON.stringify(ev));
+        clone.color = calendar.color;
+        clone.date = new Date(clone.date);
+        return clone;
+      })), [])
+      .reduce((eventsByDate, ev) => {
+        eventsByDate[getAbsoluteDay(ev.date)] = eventsByDate[getAbsoluteDay(ev.date)]
+          ? eventsByDate[getAbsoluteDay(ev.date)].concat([ ev ])
+          : [ ev ];
+        return eventsByDate;
+      }, {});
+
+    console.log(events)
 
     return (
       <div className="component-calendar">
@@ -68,15 +92,18 @@ class Calendar extends React.Component {
 
         <div className="main-container">
           {days.map((day) =>
-            <Day date={day} outOfFocus={day.getMonth() !== this.model.currentMonth} key={day}>
-              {/*this.props.calendar.events
-                .filter((event) => {
-                  return event.date.getFullYear() === day.getFullYear() &&
-                          event.date.getMonth() === day.getMonth() &&
-                          event.date.getDate() === day.getDate()
-                })
-                .map((event) => <Event event={event} />)*/
-              }
+            <Day
+                date={day}
+                outOfFocus={day.getMonth() !== this.model.currentMonth}
+                onTileClick={() => window.location.hash = day.valueOf()}
+                expanded={parseInt(window.location.hash.substr(1)) === day.valueOf()}
+                key={day.valueOf()}>
+              {events[getAbsoluteDay(day)]
+                ? events[getAbsoluteDay(day)].map((event) =>
+                    <div className="event" style={{ backgroundColor: event.color }} key={event._id}>
+                      {event.title}
+                    </div>)
+                : null}
             </Day>)}
         </div>
 
@@ -93,6 +120,15 @@ class Calendar extends React.Component {
         } else {
           return response.json();
         }
+      })
+      .then((calendars) => {
+        calendars.forEach((calendar) => {
+          calendar.events.forEach((ev) => {
+            ev.date = new Date(ev.date);
+          })
+        });
+
+        return calendars;
       })
       .then((calendars) => {
         this.model.calendars = calendars;

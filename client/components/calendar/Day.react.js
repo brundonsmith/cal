@@ -10,7 +10,7 @@ class Day extends React.Component {
 
   render() {
     return (
-      <div className={`component-day ${this.props.outOfFocus ? 'out-of-focus' : ''}`}>
+      <div className={`component-day ${this.props.outOfFocus ? 'out-of-focus' : ''} ${this.props.expanded ? 'expanded' : ''}`} onClick={this.handleClick.bind(this)}>
         <div className="number">{this.props.date.getDate()}</div>
         <div className="events">
           {this.props.children}
@@ -18,6 +18,12 @@ class Day extends React.Component {
       </div>
     );
 	}
+
+  handleClick() {
+    if(this.props.onTileClick && !this.props.expanded) {
+      this.props.onTileClick();
+    }
+  }
 
 }
 

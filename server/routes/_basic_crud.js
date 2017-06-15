@@ -6,7 +6,7 @@ var middleware = require('../middleware');
  * there's much less code duplication.
  */
 module.exports = {
-  defineReadAll: function(model, app) {
+  defineReadAll: function(model, app, processingCallback) {
     app.get(`/api/${model.modelName.toLowerCase()}/all`, middleware.authenticate, middleware.decodeSession, function (req, res) {
       var pageLength = req.query.pageLength;
       var pageNumber = req.query.pageNumber;
@@ -17,13 +17,14 @@ module.exports = {
           console.error(err);
           res.sendStatus(500);
         })
+        .then(processingCallback)
         .then(function(objects) {
           res.json(objects);
         });
     });
   },
 
-  defineRead: function(model, app) {
+  defineRead: function(model, app, processingCallback) {
     app.get(`/api/${model.modelName.toLowerCase()}/:id`, middleware.authenticate, middleware.decodeSession, function (req, res) {
       var id = req.params.id;
 
@@ -32,6 +33,7 @@ module.exports = {
           console.error(err);
           res.sendStatus(500);
         })
+        .then(processingCallback)
         .then(function(object) {
           res.json(object);
         });

@@ -1,21 +1,22 @@
 
 import React from 'react';
 
-const Event = React.createClass({
+class Event extends React.Component {
 
-  getInitialState: function() {
-    return {
-    };
-	},
+  constructor(props) {
+    super(props)
 
-  render: function() {
+    this.state = {}
+	}
+
+  render() {
     return (
       <div className="component-event">
-        <div>{this.props.name}</div>
-        <div>{this.props.date}</div>
+        <div>{this.props.event.title}</div>
       </div>
     );
-	},
+	}
 
-})
+}
+
 export default Event;
