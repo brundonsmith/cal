@@ -30,7 +30,7 @@
     "passport-jwt": "^2.2.1",
     "promise": "^7.1.1",
     "marked": "^0.3.6",
-    "mutable-model": "^1.0.1",
+    "mutable-model": ">=1.1.0",
     "node-sass": "^4.5.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
